@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fall Guys Shop</title>
+    <style>
+      body {
+        background-image: url("https://cdn2.unrealengine.com/evergreen-patternbackground-1920x1080-a7141a12bf8f.png?resize=1&w=1920"); /* Replace with shop background URL */
+        background-size: cover;
+        background-repeat: no-repeat;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .title-box {
+        background-color: purple;
+        color: white;
+        padding: 20px;
+        width: 100%;
+        text-align: center;
+      }
+
+      .hyperlink-box {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+        width: 100%;
+      }
+
+      .link-box {
+        border: 2px solid black;
+        border-radius: 10px;
+        padding: 10px;
+        margin: 0 10px;
+        text-align: center;
+        width: 200px;
+      }
+
+      .hyperlink {
+        color: gold;
+        text-decoration: none;
+        font-size: 18px;
+      }
+
+      .hyperlink:hover {
+        text-decoration: underline;
+      }
+
+      .iframe-container {
+        width: 100%;
+        height: calc(110vh - 140px);
+        overflow: hidden;
+        position: relative;
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        position: absolute;
+        top: -50px; /* Adjust this value to crop the top */
+      }
+
+      @media (max-width: 600px) {
+        .hyperlink {
+          font-size: 16px;
+        }
+
+        .link-box {
+          width: 80%;
+        }
+
+        .iframe-container {
+          height: calc(100vh - 100px);
+        }
+      }
+
+      .icon-container {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+        justify-content: flex-start;
+        width: 100%;
+      }
+
+      .icon-wrapper {
+        background-color: white;
+        padding: 5px;
+        border-radius: 5px;
+        margin-left: 10px;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .icon-image {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+      }
+
+      .hyperlink-box {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        width: 100%; /* Full width for the link boxes */
+      }
+
+      .link-box {
+        border: 2px solid black;
+        border-radius: 10px;
+        padding: 10px;
+        margin: 0 10px; /* Space between the boxes */
+        text-align: center;
+        width: 200px; /* Fixed width for the boxes */
+      }
+
+      .hyperlink {
+        color: gold;
+        text-decoration: none;
+        font-size: 18px;
+      }
+
+      .hyperlink:hover {
+        text-decoration: underline;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="title-box">
+      <h1>Fall Guys Tracker</h1>
+      <div class="icon-container">
+        <a
+          href="https://store.playstation.com/en-us/product/UP1477-PPSA04476_00-FALLGUYS00000000"
+          title="PlayStation Store"
+        >
+          <div class="icon-wrapper">
+            <img
+              class="icon-image"
+              src="Icons/playstation logo.png"
+              alt="PlayStation Logo"
+            />
+          </div>
+        </a>
+        <a href="https://www.xbox.com/en-US/games/fall-guys" title="Xbox Store">
+          <div class="icon-wrapper">
+            <img class="icon-image" src="Icons/xbox logo.png" alt="Xbox Logo" />
+          </div>
+        </a>
+        <a
+          href="https://www.nintendo.com/games/detail/fall-guys-switch/"
+          title="Nintendo Switch Store"
+        >
+          <div class="icon-wrapper">
+            <img
+              class="icon-image"
+              src="Icons/nintendo switch icon.png"
+              alt="Nintendo Switch Logo"
+            />
+          </div>
+        </a>
+        <a
+          href="https://www.epicgames.com/store/en-US/p/fall-guys"
+          title="Epic Games Store"
+        >
+          <div class="icon-wrapper">
+            <img
+              class="icon-image"
+              src="Icons/epic games.png"
+              alt="Epic Games Logo"
+            />
+          </div>
+        </a>
+      </div>
+    </div>
+
+  <body>
+
+    <div class="hyperlink-box">
+      <div class="link-box">
+        <a class="hyperlink" href="index.html">Home</a>
+      </div>
+    </div>
+
+    <div class="iframe-container">
+      <iframe src="https://fallguys-db.pages.dev/store"></iframe>
+    </div>
+  </body>
+</html>

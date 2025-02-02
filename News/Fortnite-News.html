@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/NiteTracker logo.png" />
+    <title>Fortnite Blog Posts</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <style>
+      /* General body styling for all devices */
+      body {
+        background-color: #24292e;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+      }
+
+      h1 {
+        margin: 20px 0;
+        font-size: 2rem;
+        text-align: center;
+      }
+
+      /* Center the navigation bar */
+      table {
+        width: 100%;
+        margin-bottom: 15px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap; /* Allow wrapping to prevent overflow */
+      }
+
+      th,
+      td {
+        border: 2px solid black;
+        padding: 0;
+        text-align: center;
+      }
+
+      /* Navigation links styling */
+      a {
+        color: gold;
+        text-decoration: none;
+        font-size: 16px;
+        display: block;
+        padding: 12px 16px;
+        transition: background-color 0.3s ease;
+      }
+
+      a:hover {
+        background-color: #575757;
+      }
+
+      /* Dropdown menu styles */
+      .nav-dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .nav-dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #24292e;
+        min-width: 160px;
+        z-index: 1;
+        border-radius: 5px;
+      }
+
+      .nav-dropdown-content a {
+        color: gold;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .nav-dropdown-content a:hover {
+        background-color: #575757;
+      }
+
+      .nav-dropdown:hover .nav-dropdown-content {
+        display: block;
+      }
+
+      .nav-dropdown .dropbtn {
+        background-color: transparent;
+        color: gold;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+      }
+
+      /* Profile Dropdown Styling */
+      .profile-dropdown {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        display: inline-block;
+        z-index: 10;
+      }
+
+      .profile-dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #24292e;
+        min-width: 160px;
+        height: 130xp;
+        border-radius: 5px;
+      }
+
+      .profile-dropdown-content a {
+        color: gold;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .profile-dropdown-content a:hover {
+        background-color: #575757;
+      }
+
+      .profile-dropdown:hover .profile-dropdown-content {
+        display: block;
+      }
+
+      .profile-dropdown .profile-btn {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .profile-btn img {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+      }
+
+      /* Adjust spacing between navigation items */
+      th {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      /* Styling for the festival container */
+      .festival-container {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 20px;
+        flex-wrap: wrap; /* Allow wrapping for smaller screens */
+      }
+
+      .item-card {
+        flex: 0 0 calc(33.33% - 16px); /* 3 cards per row on larger screens */
+        max-width: 200px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        text-align: center;
+      }
+
+      .item-box {
+        padding: 25px;
+        height: 180px;
+        margin-bottom: 21px;
+      }
+
+      .item-image {
+        max-width: 100%; /* Ensure images never overflow */
+        height: auto;
+        margin-bottom: 3px;
+      }
+
+      #jam-tracks {
+        margin-top: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      h2 {
+        color: white;
+        text-align: center;
+        margin-top: 7px;
+        font-size: 20px;
+      }
+
+      /* Modified to display posts vertically */
+      .blog-section {
+        display: flex;
+        flex-direction: column; /* Changes posts to be stacked vertically */
+        align-items: center; /* Centers them horizontally */
+        width: 85%;
+        margin-bottom: 20px;
+      }
+
+      .blog-post {
+        position: relative;
+        width: 85%; /* Adjust width to make it look better vertically */
+        height: auto; /* Allow the height to adjust based on image aspect ratio */
+        margin: 15px 0; /* Adjusted to space posts vertically */
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+
+      .blog-post:hover {
+        transform: scale(1.05);
+      }
+
+      .blog-post img {
+        width: 100%; /* Make the image fill the width of the container */
+        height: auto; /* Maintain aspect ratio, height adjusts automatically */
+        object-fit: cover; /* Ensures the image covers the space without distortion */
+        transition: opacity 0.3s;
+      }
+
+      .blog-post:hover img {
+        opacity: 0.7;
+      }
+
+      .blog-title {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        text-align: center;
+        padding: 10px;
+        font-size: 18px;
+      }
+
+      footer {
+        margin-top: 20px;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>Fortnite Blog Post</h1>
+      <nav>
+        <table>
+          <tr>
+            <th><a href="/index.html">Home</a></th>
+            <th><a href="/Socials/socials.html">Socials</a></th>
+            <th>
+              <a href="/Fortnite-Map/Fortnite-BR/Fortnite-Map.html">Map</a>
+            </th>
+            <th><a href="/News/Fortnite-News.html">News</a></th>
+            <th><a href="/Fortnite-Shop/Fortnite-Shop.html">Item Shop</a></th>
+            <th>
+              <a href="/Fortnite-Cosmetics/Fortnite-Cosmetics.html"
+                >Cosmetics</a
+              >
+            </th>
+            <th class="nav-dropdown">
+              <button class="dropbtn">Progress Tracker</button>
+              <div class="nav-dropdown-content">
+                <a
+                  href="/Fortnite-Progress-Tracker/Fortnite-Progress-Tracker.html"
+                  >Fortnite Progress Tracker</a
+                >
+                <a href="/Fortnite-OG-Tracker/Fortnite-OG-Tracker.html"
+                  >Fortnite OG Progress Tracker</a
+                >
+                <a
+                  href="/Fortnite-Festival-Progress-Tracker/Fortnite-Festival-Progress-Tracker.html"
+                  >Fortnite Festival Progress Tracker</a
+                >
+                <a
+                  href="/Lego-Fortnite-Progress-Tracker/Lego-Fortnite-Tracker.html"
+                  >Fortnite Lego Progress Tracker</a
+                >
+              </div>
+            </th>
+          </tr>
+        </table>
+      </nav>
+    </header>
+
+    <div class="blog-section" id="blog-posts">
+      <div class="blog-post">
+        <a
+          href="https://www.fortnite.com/news/go-full-tilt-into-fortnite-og-chapter-1-season-2?lang=en-US"
+          target="_blank"
+        >
+          <img
+            src="https://cdn2.unrealengine.com/og-chapter-1-season-2-1920x1080-b36bb234f17f.jpg"
+            alt="Godzilla in Fortnite"
+          />
+          <div class="blog-title">
+            Go Full Tilt into Fortnite OG Chapter 1 Season 2!
+          </div>
+        </a>
+      </div>
+
+      <div class="blog-post">
+        <a
+          href="https://www.fortnite.com/news/the-drum-gun-and-balance-changes-hit-fortnite-ballistic-in-v33-30?lang=en-US"
+          target="_blank"
+        >
+          <img
+            src="https://cdn2.unrealengine.com/fortnite-drum-gun-1900x600-d25328dfa437.jpg"
+            alt="Godzilla in Fortnite"
+          />
+          <div class="blog-title">
+            The Drum Gun and Balance Changes Hit Fortnite Ballistic in v33.30
+          </div>
+        </a>
+      </div>
+
+      <div class="blog-post">
+        <a
+          href="https://www.fortnite.com/news/lego-fortnite-brick-life-the-valentines-2025-update?lang=en-US"
+          target="_blank"
+        >
+          <img
+            src="https://cdn2.unrealengine.com/lego-fortnite-brick-life-valentines-2025-update-1900x600-1bd197dcbe8d.jpg"
+            alt="LEGO Fortnite Brick Life"
+          />
+          <div class="blog-title">
+            LEGO Fortnite Brick Life: The Valentine’s 2025 Update!
+          </div>
+        </a>
+      </div>
+
+      <div class="blog-post">
+        <a
+          href="https://www.fortnite.com/news/become-godzilla-in-fortnite-battle-royale?lang=en-US"
+          target="_blank"
+        >
+          <img
+            src="https://cdn2.unrealengine.com/fortnite-battle-royale-godzilla-kong-header-1900x600-11d95fb74616.jpg"
+            alt="Godzilla in Fortnite"
+          />
+          <div class="blog-title">Become Godzilla in Fortnite!</div>
+        </a>
+      </div>
+
+      <div class="blog-post">
+        <a
+          href="https://www.fortnite.com/news/virtual-artist-hatsune-miku-beams-into-fortnite-festival-season-7?lang=en-US"
+          target="_blank"
+        >
+          <img
+            src="https://cdn2.unrealengine.com/fortnite-festival-season-7-hatsune-miku-1900x600-6f5d3e5973af.jpg"
+            alt="Hatsune Miku Fortnite"
+          />
+          <div class="blog-title">
+            Virtual Artist Hatsune Miku Comes to Fortnite!
+          </div>
+        </a>
+      </div>
+
+      <div class="blog-post">
+        <a
+          href="https://www.fortnite.com/news/redeem-a-v-bucks-card-and-get-the-color-splash-jellie-outfit-in-fortnite?lang=en-US"
+          target="_blank"
+        >
+          <img
+            src="https://cdn2.unrealengine.com/fortnite-color-splash-jellie-outfit-1900x600-a9a5c48baa8f.jpg"
+            alt="Color Splash Jellie Outfit"
+          />
+          <div class="blog-title">
+            Get the Color Splash Jellie Outfit for Free!
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Fortnite Blog. All Rights Reserved.</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/NiteTracker logo.png" />
+    <title>Daily Jam Track</title>
+    <link rel="stylesheet" href="dailytrack.css" />
+    <style>
+      h1 {
+        text-align: center;
+      }
+
+      body {
+        background-color: #24292e;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h1 {
+        margin: 20px 0;
+      }
+
+      table {
+        width: 95%;
+        margin-bottom: 20px;
+        margin: 40px 0 20px 0;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        border: 2px solid black;
+        padding: 10px;
+        text-align: center;
+      }
+
+      a {
+        color: gold;
+        text-decoration: none;
+      }
+
+      .replug {
+        text-align: center;
+        font-size: 22px;
+        color: gold;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Daily Jam Track</h1>
+
+      <!-- Navigation bar -->
+      <table>
+        <tr>
+          <th><a href="/index.html">Home</a></th>
+          <th><a href="/Fortnite-Festival/DailyJamTrack.html">Daily Jam</a></th>
+          <th>
+            <a href="/Fortnite-Cosmetics/Fortnite-Cosmetics.html">Cosmetics</a>
+          </th>
+        </tr>
+      </table>
+</body>
+
+</html>
+
+
+    <div class="replug"></div>
+
+    <div class="selected-items-container">
+      <!-- JavaScript code will dynamically populate this section with selected items -->
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var selectedItems;
+        try {
+          selectedItems =
+            JSON.parse(sessionStorage.getItem("selectedItems")) || [];
+        } catch (error) {
+          console.error(
+            "Error parsing selectedItems from sessionStorage:",
+            error
+          );
+          selectedItems = [];
+        }
+
+        if (selectedItems.length > 0) {
+          fetch("jam.json")
+            .then((response) => response.json())
+            .then((data) => {
+              var selectedItemsContainer = document.querySelector(
+                ".selected-items-container"
+              );
+              selectedItems.forEach(function (itemName) {
+                var itemData = data.items.find(
+                  (item) => item.name === itemName
+                );
+                if (itemData) {
+                  var itemCard = document.createElement("div");
+                  itemCard.classList.add("item-card");
+
+                  var itemBox = document.createElement("div");
+                  itemBox.classList.add("item-box");
+
+                  var itemImage = document.createElement("img");
+                  itemImage.src = itemData.imageUrl;
+                  itemImage.alt = itemName;
+                  itemImage.classList.add("item-image");
+
+                  var itemNameElement = document.createElement("h2");
+                  itemNameElement.textContent = itemName;
+                  itemNameElement.classList.add("item-name");
+
+                  itemBox.appendChild(itemImage);
+                  itemBox.appendChild(itemNameElement);
+                  itemCard.appendChild(itemBox);
+                  selectedItemsContainer.appendChild(itemCard);
+                } else {
+                  console.error("Item data not found for:", itemName);
+                }
+              });
+            })
+            .catch((error) =>
+              console.error("Error fetching item data:", error)
+            );
+        } else {
+          console.log("No selected items to display.");
+        }
+      });
+    </script>
+  </body>
+</html>

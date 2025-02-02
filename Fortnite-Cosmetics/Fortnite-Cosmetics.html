@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/NiteTracker logo.png" />
+    <title>Fortnite Cosmetics</title>
+    <style>
+      body {
+        background-color: #24292e;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h1 {
+        margin: 20px 0;
+      }
+
+      /* Center the navigation bar */
+      table {
+        width: 100%;
+        margin-bottom: 15px;
+        text-align: center;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+      }
+
+      th,
+      td {
+        border: 2px solid black;
+        padding: 0;
+        text-align: center;
+      }
+
+      /* Navigation links styling */
+      a {
+        color: gold;
+        text-decoration: none;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        display: block;
+        padding: 12px 16px;
+        transition: background-color 0.3s ease;
+      }
+
+      a:hover {
+        background-color: #575757;
+      }
+
+      /* Dropdown menu styles */
+      .nav-dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .nav-dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #24292e;
+        min-width: 160px;
+        z-index: 1;
+        border-radius: 5px;
+      }
+
+      .nav-dropdown-content a {
+        color: gold;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .nav-dropdown-content a:hover {
+        background-color: #575757;
+      }
+
+      .nav-dropdown:hover .nav-dropdown-content {
+        display: block;
+      }
+
+      .nav-dropdown .dropbtn {
+        background-color: transparent;
+        color: gold;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+      }
+
+      /* Adjust spacing between navigation items */
+      th {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .item-card {
+        width: calc(18% - 18px);
+        margin: 10px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        text-align: center;
+      }
+
+      .item-box {
+        padding: 10px;
+        height: 180px;
+      }
+
+      .item-image {
+        max-width: 125px;
+        margin-bottom: 13px;
+      }
+
+      .item-name {
+        margin: 0;
+        font-size: 18px;
+      }
+
+      .icon-container {
+        display: flex; /* Flex container for icons */
+        align-items: center; /* Center icons vertically */
+        margin-top: 10px; /* Space between title and icons */
+        justify-content: flex-start; /* Align icons to the left */
+        width: 100%; /* Full width for alignment */
+      }
+
+      .icon-wrapper {
+        background-color: white;
+        padding: 5px;
+        border-radius: 5px;
+        margin-left: 10px; /* Gap between icons */
+        display: inline-flex; /* Use inline-flex for horizontal alignment */
+        align-items: center;
+      }
+
+      .icon-image {
+        width: 30px; /* Adjust size as needed */
+        height: 30px; /* Adjust size as needed */
+        cursor: pointer;
+      }
+
+      /* Background color for the entire item shop */
+      body {
+        background-color: #24292e;
+        /* Dark shade of gray/black */
+        color: white;
+        /* Ensure text is readable on dark backgrounds */
+        font-family: Arial, sans-serif;
+        /* Set a simple font */
+        margin: 0;
+        /* Remove default margins */
+        padding: 0;
+        /* Remove default padding */
+      }
+
+      /* Style for the item-shop container */
+      .item-shop {
+        display: flex;
+        /* Use flexbox for layout */
+        flex-wrap: wrap;
+        /* Allow item cards to wrap on smaller screens */
+        justify-content: center;
+        /* Center item cards */
+        padding: 20px;
+        /* Padding around the item shop */
+        background-color: #24292e;
+        /* Darker shade for the shop container */
+      }
+
+      /* Style for individual item cards */
+      .item-card {
+        border: 2px solid #444;
+        /* Border for item cards */
+        padding: 20px;
+        /* Padding inside each card */
+        border-radius: 10px;
+        /* Rounded corners */
+        text-align: center;
+        /* Center content */
+        background-color: #333;
+        /* Dark gray background */
+        margin: 10px;
+        /* Space between item cards */
+        width: 150px;
+        /* Fixed width for all item cards */
+      }
+
+      /* Styling for the item image */
+      .item-image {
+        width: 100px;
+        /* Consistent width for all item images */
+        height: 100px;
+        /* Consistent height */
+        object-fit: cover;
+        /* Maintain aspect ratio */
+        border-radius: 10px;
+        /* Rounded corners */
+      }
+
+      /* Styling for item names */
+      .item-name {
+        font-size: 1.2em;
+        /* Standard font size */
+        margin-top: 10px;
+        /* Space between image and text */
+        color: white;
+        /* Ensure visibility on dark backgrounds */
+      }
+
+      /* Styling for item rarity */
+      .item-rarity {
+        font-size: 1em;
+        /* Standard font size */
+        color: white;
+        /* Ensure text is readable on dark backgrounds */
+      }
+
+      /* Background colors for different rarities */
+      .common {
+        background-color: gray;
+        /* Gray background for common outfits */
+      }
+
+      .uncommon {
+        background-color: gray;
+        /* Green background for uncommon outfits */
+      }
+
+      .rare {
+        background-color: gray;
+        /* Blue background for rare outfits */
+      }
+
+      .epic {
+        background-color: gray;
+        /* Purple background for epic outfits */
+      }
+
+      /* Style for navigation button */
+      .nav-button {
+        display: inline-block;
+        /* Allow the button to be inline */
+        padding: 10px 20px;
+        /* Padding for the button */
+        background-color: #ffcc00;
+        /* Yellow color for the button */
+        color: black;
+        /* Text color */
+        text-decoration: none;
+        /* No underline */
+        border-radius: 5px;
+        /* Rounded corners */
+        font-size: 1.1em;
+        /* Slightly larger font size */
+        text-align: center;
+        /* Center text in the button */
+        margin-top: 20px;
+        /* Margin above the button */
+        margin-left: 10px;
+        transition: background-color 0.3s;
+        /* Smooth hover transition */
+      }
+
+      .nav-button:hover {
+        background-color: #ffa500;
+        /* Darker yellow on hover */
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Fortnite Cosmetics</h1>
+
+    <table>
+  <!-- Centering the navigation and making sure links are next to each other -->
+  <table>
+    <tr>
+      <th><a href="/index.html">Home</a></th>
+      <th><a href="/Socials/socials.html">Socials</a></th>
+      <th><a href="/Fortnite-Map/Fortnite-BR/Fortnite-Map.html">Map</a></th>
+      <th><a href="/News/Fortnite-News.html">News</a></th>
+      <th><a href="/Fortnite-Shop/Fortnite-Shop.html">Item Shop</a></th>
+      <th>
+        <a href="/Fortnite-Cosmetics/Fortnite-Cosmetics.html">Cosmetics</a>
+      </th>
+      <th class="nav-dropdown">
+        <button class="dropbtn">Progress Tracker</button>
+        <div class="nav-dropdown-content">
+          <a href="/Fortnite-Progress-Tracker/Fortnite-Progress-Tracker.html"
+            >Fortnite Progress Tracker</a
+          >
+          <a href="/Fortnite-OG-Tracker/Fortnite-OG-Tracker.html"
+            >Fortnite OG Progress Tracker</a
+          >
+          <a
+            href="/Fortnite-Festival-Progress-Tracker/Fortnite-Festival-Progress-Tracker.html"
+            >Fortnite Festival Progress Tracker</a
+          >
+          <a href="/Lego-Fortnite-Progress-Tracker/Lego-Fortnite-Tracker.html"
+            >Fortnite Lego Progress Tracker</a
+          >
+        </div>
+      </th>
+    </tr>
+  </table>
+  </body>
+
+  <div class="title-box">
+    <div class="icon-container">
+      <!-- Separate container for icons -->
+      <a href="/Fortnite-Skins/Fortnite-Skins.html" title="outfits">
+        <div class="icon-wrapper">
+          <img class="icon-image" src="/Icons/outfits.png" alt="outfits Logo" />
+        </div>
+      </a>
+
+      <a href="/Fortnite-Festival/Fortnite-Festival.html" title="Music">
+        <div class="icon-wrapper">
+          <img class="icon-image" src="/Icons/music.png" alt="Music Logo" />
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Container for the item shop -->
+<div class="item-shop">
+
+  <!-- Uncommon outfits -->
+  <div class="item-card uncommon">
+    <img src="https://i.imgur.com/9bWj2ih.png" alt="Recruit"
+      class="item-image">
+    <h2 class="item-name">Recruit</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/c/cf/Uncommon1.jpg?width=325" alt="Scout"
+      class="item-image">
+    <h2 class="item-name">Scout</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/4/4b/Uncommon2.jpg?width=325" alt="Ranger"
+      class="item-image">
+    <h2 class="item-name">Ranger</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/0/0e/Uncommon3.jpg?width=325" alt="Trooper"
+      class="item-image">
+    <h2 class="item-name">Trooper</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/8/87/Uncommon4.jpg?width=325"
+      alt="Assault Trooper" class="item-image">
+    <h2 class="item-name">Assault Trooper</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/e/e6/Uncommon5.jpg?width=325" alt="Tracker"
+      class="item-image">
+    <h2 class="item-name">Tracker</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/d/de/Uncommon6.jpg?width=325" alt="Pathfinder"
+      class="item-image">
+    <h2 class="item-name">Pathfinder</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/6/6f/Uncommon7.jpg?width=325" alt="Renegade"
+      class="item-image">
+    <h2 class="item-name">Renegade</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/0/0c/Uncommon8.jpg?width=325" alt="Commando"
+      class="item-image">
+    <h2 class="item-name">Commando</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/3/37/Uncommon9.jpg?width=325" alt="Nog Ops"
+      class="item-image">
+    <h2 class="item-name">Nog Ops</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/0/02/Uncommon10.jpg?width=325"
+      alt="Yuletide Ranger" class="item-image">
+    <h2 class="item-name">Yuletide Ranger</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/3/32/Uncommon11.jpg?width=325" alt="Devastator"
+      class="item-image">
+    <h2 class="item-name">Devastator</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/1/1c/Uncommon12.jpg?width=325" alt="Dominator"
+      class="item-image">
+    <h2 class="item-name">Dominator</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/0/04/Uncommon13.jpg?width=325"
+      alt="Highrise Assault Trooper" class="item-image">
+    <h2 class="item-name">Highrise Assault Trooper</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/f/f9/Uncommon14.jpg?width=325"
+      alt="Tower Recon Specialist" class="item-image">
+    <h2 class="item-name">Tower Recon Specialist</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/f/fa/Uncommon15.jpg?width=325"
+      alt="	Crimson Scout" class="item-image">
+    <h2 class="item-name">Crimson Scout</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/8/8a/Uncommon16.jpg?width=325"
+      alt="Scarlet Defender" class="item-image">
+    <h2 class="item-name">Scarlet Defender</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/e/e7/Uncommon17.jpg?width=325"
+      alt="Tactics Officer" class="item-image">
+    <h2 class="item-name">Tactics Officer</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/4/4c/Uncommon18.jpg?width=325"
+      alt="Jungle Scout" class="item-image">
+    <h2 class="item-name">Jungle Scout</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/7/70/Uncommon19.jpg?width=325"
+      alt="Sgt. Green Clover" class="item-image">
+    <h2 class="item-name">Sgt. Green Clover</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/0/04/Uncommon20.jpg?width=325" alt="Whiplash"
+      class="item-image">
+    <h2 class="item-name">Whiplash</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/d/d6/Uncommon21.jpg?width=325" alt="Nitelite"
+      class="item-image">
+    <h2 class="item-name">Nitelite</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/4/44/Uncommon22.jpg?width=325" alt="Liteshow"
+      class="item-image">
+    <h2 class="item-name">Liteshow</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/e/ec/Uncommon23.jpg?width=325"
+      alt="Star-Spangled Trooper" class="item-image">
+    <h2 class="item-name">Star-Spangled Trooper</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/b/b0/Uncommon24.jpg?width=325"
+      alt="Star-Spangled Ranger" class="item-image">
+    <h2 class="item-name">Star-Spangled Ranger</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/1/17/Uncommon25.jpg?width=325" alt="Armadillo"
+      class="item-image">
+    <h2 class="item-name">Armadillo</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/a/ae/Uncommon26.jpg?width=325" alt="Scorpion"
+      class="item-image">
+    <h2 class="item-name">Scorpion</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/a/a2/Uncommon27.jpg?width=325" alt="Garrison"
+      class="item-image">
+    <h2 class="item-name">Garrison</h2>
+      <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/e/ed/Uncommon28.jpg?width=325"
+      alt="Grill Sergeant" class="item-image">
+    <h2 class="item-name">Grill Sergeant</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/d/d2/Brainiac-Skin.jpg?width=325"
+      alt="Brainiac" class="item-image">
+    <h2 class="item-name">Brainiac</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/b/bd/Bullseye-Skin.jpg?width=325"
+      alt="Bullseye" class="item-image">
+    <h2 class="item-name">Bullseye</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/6/60/Bunnymoon-Skin.jpg?width=325"
+      alt="Bunnymoon" class="item-image">
+    <h2 class="item-name">Bunnymoon</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/8/81/Patch-Patroller-Skin.jpg?width=325"
+      alt="Patch Patroller" class="item-image">
+    <h2 class="item-name">Patch Patroller</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/1/1d/Striped-Soldier-Skin.jpg?width=325"
+      alt="Striped Soldier" class="item-image">
+    <h2 class="item-name">Striped Soldier</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card uncommon">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/3/3e/Whistle-Warrior-Skin.jpg?width=325"
+      alt="Whistle Warrior" class="item-image">
+    <h2 class="item-name">Whistle Warrior</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+
+  <!-- Rare item card -->
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/6/62/Rare1.jpg?width=325"
+      alt="Aerial Assault Trooper" class="item-image">
+    <h2 class="item-name">Aerial Assault Trooper</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/5/5a/Rare2.jpg?width=325" alt="Renegade Raider"
+      class="item-image">
+    <h2 class="item-name">Renegade Raider</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/a/a6/Rare3.jpg?width=325"
+      alt="First Strike Specialist" class="item-image">
+    <h2 class="item-name">First Strike Specialist</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/e/ed/Rare4.jpg?width=325" alt="Recon Expert"
+      class="item-image">
+    <h2 class="item-name">Recon Expert</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/0/08/Rare5.jpg?width=325" alt="Special Forces"
+      class="item-image">
+    <h2 class="item-name">Special Forces</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/3/33/Rare6.jpg?width=325" alt="Brawler"
+      class="item-image">
+    <h2 class="item-name">Brawler</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/9/94/Rare7.jpg?width=325" alt="Recon Scout"
+      class="item-image">
+    <h2 class="item-name">Recon Scout</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/5/57/Rare8.jpg?width=325"
+      alt="Survival Specialist" class="item-image">
+    <h2 class="item-name">Survival Specialist</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/6/6d/Rare9.jpg?width=325" alt="Desperado"
+      class="item-image">
+    <h2 class="item-name">Desperado</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/3/3b/Rare10.jpg?width=325"
+      alt="Munitions Expert" class="item-image">
+    <h2 class="item-name">Munitions Expert</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/e/e0/Rare11.jpg?width=325" alt="Infiltrator"
+      class="item-image">
+    <h2 class="item-name">Infiltrator</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/4/4d/Rare12.jpg?width=325"
+      alt="Recon Specialist" class="item-image">
+    <h2 class="item-name">Recon Specialist</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/0/03/Rare13.jpg?width=325" alt="Blue Squire"
+      class="item-image">
+    <h2 class="item-name">Blue Squire</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/a/a4/Rare14.jpg?width=325" alt="Royale Knight"
+      class="item-image">
+    <h2 class="item-name">Royale Knight</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/0/08/Rare15.jpg?width=325" alt="Brite Bomber"
+      class="item-image">
+    <h2 class="item-name">Brite Bomber</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/c/c8/Rare16.jpg?width=325"
+      alt="Red-Nosed Raider" class="item-image">
+    <h2 class="item-name">Red-Nosed Raider</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/9/93/Rare17.jpg?width=325"
+      alt="Codename E.L.F." class="item-image">
+    <h2 class="item-name">Codename E.L.F.</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/c/c5/Rare18.jpg?width=325"
+      alt="Circuit Breaker" class="item-image">
+    <h2 class="item-name">Circuit Breaker</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/2/24/Rare19.jpg?width=325" alt="Absolute Zero"
+      class="item-image">
+    <h2 class="item-name">Absolute Zero</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/f/f3/Rare20.jpg?width=325"
+      alt="Arctic Assassin" class="item-image">
+    <h2 class="item-name">Arctic Assassin</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/3/33/Rare21.jpg?width=325"
+      alt="Blue Team Leader" class="item-image">
+    <h2 class="item-name">Blue Team Leader</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/3/3e/Rare22.jpg?width=325" alt="Hyperion"
+      class="item-image">
+    <h2 class="item-name">Hyperion</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/c/cf/Rare23.jpg?width=325" alt="Snorkel Ops"
+      class="item-image">
+    <h2 class="item-name">Snorkel Ops</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/c/c4/Rare24.jpg?width=325" alt="Dazzle"
+      class="item-image">
+    <h2 class="item-name">Dazzle</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/5/5f/Rare25.jpg?width=325" alt="Sash Sergeant"
+      class="item-image">
+    <h2 class="item-name">Sash Sergeant</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/b/b5/Rare26.jpg?width=325"
+      alt="Brilliant Striker" class="item-image">
+    <h2 class="item-name">Brilliant Striker</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/6/67/Rare27.jpg?width=325"
+      alt="Radiant Striker" class="item-image">
+    <h2 class="item-name">Radiant Striker</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+  <div class="item-card rare">
+    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/b/b5/Rare28.jpg?width=325" alt="Midnight Ops"
+      class="item-image">
+    <h2 class="item-name">Midnight Ops</h2>
+    <p class="item-rarity"></p>
+  </div>
+
+
+</html>

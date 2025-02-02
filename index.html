@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/NiteTracker logo.png" />
+    <title>NiteTracker</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3464809548952977"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      /* General body styling for all devices */
+      body {
+        background-color: #24292e;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+      }
+
+      h1 {
+        margin: 20px 0;
+        font-size: 2rem;
+        text-align: center;
+      }
+
+      /* Center the navigation bar */
+      table {
+        width: 100%;
+        margin-bottom: 15px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap; /* Allow wrapping to prevent overflow */
+      }
+
+      th,
+      td {
+        border: 2px solid black;
+        padding: 0;
+        text-align: center;
+      }
+
+      /* Navigation links styling */
+      a {
+        color: gold;
+        text-decoration: none;
+        font-size: 16px;
+        display: block;
+        padding: 12px 16px;
+        transition: background-color 0.3s ease;
+      }
+
+      a:hover {
+        background-color: #575757;
+      }
+
+      /* Dropdown menu styles */
+      .nav-dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .nav-dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #24292e;
+        min-width: 160px;
+        z-index: 1;
+        border-radius: 5px;
+      }
+
+      .nav-dropdown-content a {
+        color: gold;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .nav-dropdown-content a:hover {
+        background-color: #575757;
+      }
+
+      .nav-dropdown:hover .nav-dropdown-content {
+        display: block;
+      }
+
+      .nav-dropdown .dropbtn {
+        background-color: transparent;
+        color: gold;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+      }
+
+      /* Profile Dropdown Styling */
+      .profile-dropdown {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        display: inline-block;
+        z-index: 10;
+      }
+
+      .profile-dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #053462;
+        min-width: 110px;
+        height: 110px;
+        border-radius: 0px;
+      }
+
+      .profile-dropdown-content a {
+        color: gold;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .profile-dropdown-content a:hover {
+        background-color: #575757;
+      }
+
+      .profile-dropdown:hover .profile-dropdown-content {
+        display: block;
+      }
+
+      .profile-dropdown .profile-btn {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0px;
+        border-radius: 0%;
+        overflow: hidden;
+        box-shadow: 3 3px 3px gold(0, 73%, 52%, 0.3);
+      }
+
+      .profile-btn img {
+        width: 110px; /* Set the width to 180px */
+        height: 110px; /* Set the height to 180px to make it square */
+        border-radius: 0; /* Ensure the image has square corners */
+        border: 2px solid gold; /* Add a border around the image */
+      }
+
+      /* Adjust spacing between navigation items */
+      th {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      /* Styling for the festival container */
+      .festival-container {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 20px;
+        flex-wrap: wrap; /* Allow wrapping for smaller screens */
+      }
+
+      .item-card {
+        flex: 0 0 calc(33.33% - 16px); /* 3 cards per row on larger screens */
+        max-width: 200px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        text-align: center;
+      }
+
+      .item-box {
+        padding: 25px;
+        height: 180px;
+        margin-bottom: 21px;
+      }
+
+      .item-image {
+        max-width: 100%; /* Ensure images never overflow */
+        height: auto;
+        margin-bottom: 3px;
+      }
+
+      #jam-tracks {
+        margin-top: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      h2 {
+        color: white;
+        text-align: center;
+        margin-top: 7px;
+        font-size: 20px;
+      }
+
+      /* Weekly Quest Image Section */
+      .weekly-quest-container {
+        width: 100%;
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        margin-top: 20px;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      .weekly-quest-image {
+        max-width: 100%; /* Ensure images fit within their containers */
+        height: auto;
+        border: 2px solid gold;
+        border-radius: 10px;
+        box-shadow: 3px 3px 3px rgba(255, 215, 0, 0.3);
+        transition: transform 0.3s ease;
+        margin-bottom: 20px; /* Add space below the image */
+      }
+
+      .weekly-quest-image:hover {
+        transform: scale(1.05);
+      }
+
+      .blog-box {
+        background-color: #242934;
+        color: white;
+        padding: 20px;
+        border-radius: 15px;
+        width: 90%; /* Adjust width for responsiveness */
+        text-align: center;
+        font-size: 18px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s, transform 0.2s;
+        margin-top: 25px;
+      }
+
+      .blog-box:hover {
+        background-color: #1c7ab7;
+        transform: translateY(-2px);
+      }
+
+      /* Styling for the tweet and Item Shop post side by side */
+      .social-posts {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap; /* Allow wrapping for smaller screens */
+        margin-top: 20px;
+      }
+
+      .twitter-post,
+      .item-shop-post {
+        flex: 1 1 300px; /* Flexible width, min 300px */
+        max-width: 45%; /* Ensure no overflow */
+      }
+
+      /* Mobile-specific adjustments for navigation and layout */
+      @media (max-width: 768px) {
+        body {
+          font-size: 16px; /* Slightly larger text for better readability */
+          padding: 0 15px; /* Increase side padding for proper spacing */
+          overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        table {
+          flex-wrap: wrap; /* Ensure navigation items wrap on smaller screens */
+          width: 100%; /* Keep the table responsive */
+          margin: 0 auto; /* Center the table on the screen */
+        }
+
+        th,
+        td {
+          padding: 10px 5px; /* Add vertical padding while keeping horizontal padding narrow */
+          font-size: 16px; /* Maintain a readable font size */
+          text-align: center;
+        }
+
+        a {
+          font-size: 16px; /* Ensure links remain easy to read */
+          padding: 12px 16px; /* Adjust padding to balance clickable area */
+        }
+
+        /* Ensure images and containers resize properly */
+        .weekly-quest-image {
+          max-width: 95%; /* Ensure the image fits nicely within the viewport */
+          height: auto; /* Maintain aspect ratio */
+          margin: 10px auto; /* Add space above and below */
+        }
+
+        .festival-container {
+          flex-wrap: wrap; /* Allow cards to stack */
+          justify-content: space-evenly; /* Distribute cards evenly */
+          margin-top: 20px; /* Add spacing above */
+        }
+
+        .item-card {
+          flex: 1 1 calc(48% - 10px); /* Two cards per row with a gap */
+          max-width: 48%; /* Prevent cards from stretching too much */
+          margin: 5px; /* Add space around each card */
+        }
+
+        .social-posts {
+          flex-direction: column; /* Stack posts vertically */
+          gap: 20px; /* Add space between posts */
+          margin-top: 20px; /* Add spacing above */
+        }
+
+        .blog-box {
+          width: 100%; /* Ensure the blog box takes the full width */
+          margin: 20px 0; /* Add space above and below */
+          font-size: 16px; /* Ensure text remains readable */
+        }
+
+        body {
+          overflow-x: hidden; /* Ensure no horizontal scroll */
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>NiteTracker.net</h1>
+
+    <!-- Centering the navigation and making sure links are next to each other -->
+    <table>
+      <tr>
+        <th><a href="/index.html">Home</a></th>
+        <th><a href="/Socials/socials.html">Socials</a></th>
+        <th><a href="/Fortnite-Map/Fortnite-BR/Fortnite-Map.html">Map</a></th>
+        <th><a href="/News/Fortnite-News.html">News</a></th>
+        <th><a href="/Fortnite-Shop/Fortnite-Shop.html">Item Shop</a></th>
+        <th>
+          <a href="/Fortnite-Cosmetics/Fortnite-Cosmetics.html">Cosmetics</a>
+        </th>
+        <th class="nav-dropdown">
+          <button class="dropbtn">Progress Tracker</button>
+          <div class="nav-dropdown-content">
+            <a href="/Fortnite-Progress-Tracker/Fortnite-Progress-Tracker.html"
+              >Fortnite Progress Tracker</a
+            >
+            <a href="/Fortnite-OG-Tracker/Fortnite-OG-Tracker.html"
+              >Fortnite OG Progress Tracker</a
+            >
+            <a
+              href="/Fortnite-Festival-Progress-Tracker/Fortnite-Festival-Progress-Tracker.html"
+              >Fortnite Festival Progress Tracker</a
+            >
+            <a href="/Lego-Fortnite-Progress-Tracker/Lego-Fortnite-Tracker.html"
+              >Fortnite Lego Progress Tracker</a
+            >
+          </div>
+        </th>
+      </tr>
+    </table>
+
+    <div id="jam-tracks">This Week's Jam Tracks:</div>
+
+    <div class="festival-container">
+      <div class="item-card">
+        <div class="item-box">
+          <img
+            src="https://pbs.twimg.com/media/GijOwcFWoAAMMrH?format=png&name=small"
+            alt="On The Floor"
+            class="item-image"
+          />
+          <h2 class="item-name">On The Floor</h2>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-box">
+          <img
+            src="https://pbs.twimg.com/media/GijOmFNX0AAY7ZD?format=png&name=small"
+            alt="Party Like A Rock Star"
+            class="item-image"
+          />
+          <h2 class="item-name">Party Like A Rock Star</h2>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-box">
+          <img
+            src="https://pbs.twimg.com/media/GijOzSLWwAET-7B?format=png&name=small"
+            alt="Fell In Love With A Girl"
+            class="item-image"
+          />
+          <h2 class="item-name">Fell In Love With A Girl</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- New Image Section for Weekly Quest -->
+    <div class="weekly-quest-container">
+      <img
+        src="https://pbs.twimg.com/media/Gh06L_AXwAAG-cE?format=jpg&name=medium"
+        alt="Weekly Quest"
+        class="weekly-quest-image"
+      />
+    </div>
+
+    <iframe
+      width="800"
+      height="415"
+      src="https://www.youtube.com/embed/j9b543Z6aus?si=GI-O0tYdePYqJZrG"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
+
+    <!-- Social Media Posts Section -->
+    <div class="social-posts">
+      <div class="twitter-post">
+        <blockquote class="twitter-tweet">
+          <p lang="en" dir="ltr">
+            FORTNITE OG SEASON 2 PASS IS NOW AVAILABLE!<br /><br />If you enjoy
+            my content, please consider using code &#39;Replug&#39; when
+            purchasing the Battle Pass. Thank you so much! 🩵
+            <a
+              href="https://twitter.com/hashtag/EpicPartner?src=hash&amp;ref_src=twsrc%5Etfw"
+              >#EpicPartner</a
+            >
+            <a href="https://t.co/DOVlXYe2E2">pic.twitter.com/DOVlXYe2E2</a>
+          </p>
+          &mdash; Replug (@Replugs2)
+          <a
+            href="https://twitter.com/Replugs2/status/1885296209956360336?ref_src=twsrc%5Etfw"
+            >January 31, 2025</a
+          >
+        </blockquote>
+        <script
+          async
+          src="https://platform.twitter.com/widgets.js"
+          charset="utf-8"
+        ></script>
+      </div>
+
+      <!-- Replaced Threads post with Item Shop post -->
+      <div class="item-shop-post">
+        <a
+          href="https://www.fortnite.com/item-shop?creator-code=replug"
+          target="_blank"
+        >
+          <img
+            src="https://pbs.twimg.com/media/GivbSiXWsAATUCG?format=jpg&name=small"
+            alt="Item Shop Post"
+            style="width: 100%; border-radius: 10px; margin-bottom: 10px"
+          />
+          Item Shop
+        </a>
+      </div>
+    </div>
+
+    <script>
+      // Load saved profile image on any page
+      window.onload = function () {
+        const savedImage = localStorage.getItem("profileImage");
+        if (savedImage) {
+          document.getElementById("profile-img").src = savedImage;
+        }
+      };
+    </script>
+  </body>
+</html>

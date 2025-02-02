@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/NiteTracker logo.png" />
+    <title>Fortnite OG Progress Tracker</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Burbank+Big+Condensed-Bold&display=swap");
+
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        min-height: 100vh;
+        font-family: "Roboto", sans-serif;
+        background-color: grey;
+      }
+
+      .background-container {
+        background-image: url("Fortnite OG.png");
+        background-size: 100%;
+        background-position: top;
+        background-repeat: no-repeat;
+        width: 100%;
+        max-width: 500px;
+        margin: 20px;
+        border: 4px solid black;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      #Home {
+        position: absolute;
+        font-size: 24px;
+        top: 20px;
+        right: 20px;
+        color: gold;
+        text-decoration: none;
+      }
+
+      .chapter-text {
+        font-size: 17px;
+        text-transform: uppercase;
+        color: white;
+        margin-bottom: 5px;
+        text-shadow: -1px -1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000,
+          1px 1px 1px #000;
+        text-align: center;
+      }
+
+      .outer-container {
+        position: relative;
+        width: 100%;
+        max-width: 520px;
+        border: 3px solid black;
+        margin: 20px auto;
+        box-sizing: border-box;
+        padding: 10px;
+      }
+
+      .container {
+        width: 100%;
+        position: relative;
+        border: 3px solid black;
+        font-weight: bold;
+        box-sizing: border-box;
+        overflow: hidden;
+        text-align: center;
+        background-color: transparent;
+        padding: 10px 0;
+      }
+
+      .progress-bar {
+        background-color: white;
+        height: 30px;
+        width: calc(100% - 20px);
+        border: 2px solid black;
+        margin: 10px auto;
+        box-sizing: border-box;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .progress-completed {
+        background-color: gold; /* Red Color */
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        transition: width 0.5s ease; /* Added transition */
+      }
+
+      .progress-text,
+      .countdown {
+        font-size: 24px;
+        color: white;
+        padding: 10px;
+        border-top: 2px solid black;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      .countdown {
+        font-size: 25px;
+        margin-top: 10px;
+      }
+
+      .percentage {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        padding-right: 5px;
+        color: black;
+        z-index: 2;
+      }
+
+      .replug-text {
+        font-weight: bold;
+        font-size: 10px;
+        color: white;
+        position: absolute;
+        bottom: 6px;
+        left: 10px;
+        z-index: 2;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="title"></div>
+
+    <div class="background-container">
+      <div class="outer-container">
+        <div class="container">
+          <div class="chapter-text">OG Chapter 1 Season 2 Pass</div>
+          <!-- Updated Season Name -->
+          <div class="progress-bar">
+            <div class="progress-completed" style="width: 0%"></div>
+            <div class="percentage"></div>
+          </div>
+          <div class="replug-text"></div>
+        </div>
+      </div>
+    </div>
+
+    <a href="/index.html" id="Home">Home</a>
+
+    <div class="progress-text" id="progressText">
+      Progress: <span class="current-progress"></span>% Completed
+    </div>
+    <div class="progress-text">
+      Days Remaining: <span id="remainingDays"></span>
+    </div>
+    <div class="countdown" id="countdownTime"></div>
+
+    <script>
+      function updateProgressBox() {
+        var seasonStart = new Date(2025, 0, 31); // January 31, 2025
+        var seasonEnd = new Date(2025, 2, 25); // March 25, 2025
+        var currentDate = new Date();
+
+        // Calculate remaining time
+        var timeDiff = seasonEnd - currentDate;
+
+        // Calculate total duration and elapsed duration
+        var totalDuration = seasonEnd - seasonStart;
+        var elapsedDuration = currentDate - seasonStart;
+
+        var remainingDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)); // Whole days left
+
+        // Calculate percentage of progress
+        var percentage = Math.min(
+          Math.round((elapsedDuration / totalDuration) * 100),
+          100
+        );
+
+        // Update progress bar and text
+        var progressCompleted = document.querySelector(".progress-completed");
+        progressCompleted.style.width = percentage + "%";
+        var percentageElement = document.querySelector(".percentage");
+        percentageElement.textContent = percentage + "%";
+        var progressText = document.querySelector(".current-progress");
+        progressText.textContent = percentage;
+
+        var remainingDaysElement = document.getElementById("remainingDays");
+        remainingDaysElement.textContent = remainingDays;
+
+        // Calculate countdown time (days, hours, minutes, seconds)
+        var daysLeft = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        var hoursLeft = Math.floor(
+          (timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        var minutesLeft = Math.floor(
+          (timeDiff % (1000 * 60 * 60)) / (1000 * 60)
+        );
+        var secondsLeft = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+        // Display the countdown
+        var countdownTime = document.getElementById("countdownTime");
+        countdownTime.textContent =
+          String(daysLeft).padStart(2, "0") +
+          " : " +
+          String(hoursLeft).padStart(2, "0") +
+          " : " +
+          String(minutesLeft).padStart(2, "0") +
+          " : " +
+          String(secondsLeft).padStart(2, "0");
+      }
+
+      updateProgressBox();
+      setInterval(updateProgressBox, 1000);
+    </script>
+  </body>
+</html>

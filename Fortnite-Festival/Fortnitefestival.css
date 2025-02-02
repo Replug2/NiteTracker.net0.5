@@ -1,0 +1,96 @@
+/* Background color for the entire item shop */
+body {
+  background-color: #24292e;
+  /* Dark shade of gray/black */
+  color: white;
+  /* Ensure text is readable on dark backgrounds */
+  font-family: Arial, sans-serif;
+  /* Set a simple font */
+  margin: 0;
+  /* Remove default margins */
+  padding: 0;
+  /* Remove default padding */
+}
+
+/* Container for festival items */
+.festival-container {
+  display: flex;
+  /* Use flexbox layout */
+  flex-wrap: wrap;
+  /* Allow containers to wrap to the next line */
+}
+
+/* Style for each festival item */
+.item-card {
+  width: calc(20% - 20px);
+  /* Adjust item width based on desired layout */
+  margin: 10px;
+  /* Add margin between items */
+  border: 1px solid #ccc;
+  /* Add border for item card */
+  box-sizing: border-box;
+  /* Include padding and border in the container's total width */
+}
+
+/* Style for the box containing each item */
+.item-box {
+  text-align: center;
+  /* Center align text */
+  padding: 25px;
+  /* Add padding inside the box */
+  height: 170px;
+  /* Maintain the same height as before */
+}
+
+.item-image {
+  max-width: 115px;
+  /* Adjust as needed */
+  margin-bottom: 1px;
+  /* Add margin between image and text */
+}
+
+.item-name {
+  margin: 4px;
+  font-size: 16px;
+  /* Adjust font size as needed */
+}
+
+/* Style for the button */
+.toggle-btn {
+  background-color: #4caf50;
+  /* Green */
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 1px 0;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+/* Style for the search input */
+#searchInput {
+  width: 300px;
+  padding: 10px;
+  font-size: 18px;
+}
+
+/* Style for the search results */
+#searchResults {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Style for each search result item */
+#searchResults li {
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+/* Style for selected search result item */
+#searchResults li.selected {
+  background-color: #f0f0f0;
+}

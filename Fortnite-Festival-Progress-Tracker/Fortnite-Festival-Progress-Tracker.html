@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/NiteTracker logo.png" />
+    <title>Festival Progress Tracker</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Burbank+Big+Condensed-Bold&display=swap");
+
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        min-height: 100vh;
+        font-family: "Roboto", sans-serif;
+        background-color: grey;
+      }
+
+      .background-container {
+        background-image: url("Hatsune Miku.png");
+        background-size: 100%;
+        background-position: top;
+        background-repeat: no-repeat;
+        width: 100%;
+        max-width: 500px;
+        margin: 20px;
+        border: 4px solid black;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      .title {
+        background-image: url("Fortnite Festival Logo (2).PNG");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 85%;
+        height: 85px;
+      }
+
+      #Home {
+        position: absolute;
+        font-size: 24px;
+        top: 20px;
+        right: 20px;
+        color: gold;
+        text-decoration: none;
+      }
+
+      .chapter-text {
+        font-size: 17px;
+        text-transform: uppercase;
+        color: white;
+        margin-bottom: 5px;
+        text-shadow: -1px -1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000,
+          1px 1px 1px #000;
+        text-align: center;
+      }
+
+      .outer-container {
+        position: relative;
+        width: 100%;
+        max-width: 520px;
+        border: 3px solid black;
+        margin: 20px auto;
+        box-sizing: border-box;
+        padding: 10px;
+      }
+
+      .container {
+        width: 100%;
+        position: relative;
+        border: 3px solid black;
+        font-weight: bold;
+        box-sizing: border-box;
+        overflow: hidden;
+        text-align: center;
+        background-color: transparent;
+        padding: 10px 0;
+      }
+
+      .progress-bar {
+        background-color: white;
+        height: 30px;
+        width: calc(100% - 20px);
+        border: 2px solid black;
+        margin: 10px auto;
+        box-sizing: border-box;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .progress-completed {
+        background-color: turquoise;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+      }
+
+      .progress-text,
+      .countdown {
+        font-size: 24px;
+        color: white;
+        padding: 10px;
+        border-top: 2px solid black;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      .countdown {
+        font-size: 25px;
+        margin-top: 10px;
+      }
+
+      .percentage {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        padding-right: 5px;
+        color: black;
+        z-index: 2;
+      }
+
+      .replug-text {
+        font-weight: bold;
+        font-size: 10px;
+        color: white;
+        position: absolute;
+        bottom: 6px;
+        left: 10px;
+        z-index: 2;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="title"></div>
+
+    <div class="background-container">
+      <div class="outer-container">
+        <div class="container">
+          <div class="chapter-text">SEASON 7 (Hatsune Miku)</div>
+          <div class="progress-bar">
+            <div class="progress-completed" style="width: 0%"></div>
+            <div class="percentage"></div>
+          </div>
+          <div class="replug-text"></div>
+        </div>
+      </div>
+    </div>
+
+    <a href="/index.html" id="Home">Home</a>
+
+    <div class="progress-text" id="progressText">
+      Progress: <span class="current-progress"></span>% Completed
+    </div>
+    <div class="progress-text">
+      Days Remaining: <span id="remainingDays"></span>
+    </div>
+    <div class="countdown" id="countdownTime"></div>
+
+    <script>
+      function updateProgressBox() {
+        const seasonStart = new Date(2025, 0, 14); // January 14, 2025
+        const seasonEnd = new Date(2025, 3, 8); // April 8, 2025
+        const currentDate = new Date();
+        const remainingDays = Math.ceil(
+          (seasonEnd - currentDate) / (1000 * 60 * 60 * 24)
+        );
+
+        const totalDuration = seasonEnd - seasonStart;
+        const elapsedDuration = currentDate - seasonStart;
+
+        let percentage = Math.round((elapsedDuration / totalDuration) * 100);
+
+        if (percentage > 100) {
+          percentage = 100;
+        }
+
+        document.querySelector(".progress-completed").style.width =
+          percentage + "%";
+        document.querySelector(".percentage").textContent = percentage + "%";
+        document.querySelector(".current-progress").textContent = percentage;
+        document.getElementById("remainingDays").textContent = remainingDays;
+
+        const countdownTime = document.getElementById("countdownTime");
+        const targetTime = new Date(currentDate);
+        targetTime.setUTCHours(6, 0, 0, 0);
+
+        if (currentDate.getUTCHours() >= 6) {
+          targetTime.setUTCDate(targetTime.getUTCDate() + 1);
+        }
+
+        const timeDiff = targetTime - currentDate;
+
+        const hoursLeft = Math.floor(timeDiff / (1000 * 60 * 60));
+        const minutesLeft = Math.floor(
+          (timeDiff % (1000 * 60 * 60)) / (1000 * 60)
+        );
+        const secondsLeft = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+        countdownTime.textContent = `Next update in: ${hoursLeft}h ${minutesLeft}m ${secondsLeft}s `;
+      }
+
+      updateProgressBox();
+      setInterval(updateProgressBox, 1000);
+    </script>
+  </body>
+</html>

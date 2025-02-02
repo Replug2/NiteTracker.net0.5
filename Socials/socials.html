@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/NiteTracker logo.png" />
+    <title>Socials</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <style>
+      html,
+      body {
+        height: 100%;
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+      }
+
+      body {
+        background-color: #24292e;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-y: auto; /* Ensure vertical scrolling */
+      }
+
+      h1 {
+        margin: 20px 0;
+        color: white;
+      }
+
+      table {
+        width: 100%;
+        margin-bottom: 15px;
+        text-align: center;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+      }
+
+      th,
+      td {
+        border: 2px solid black;
+        padding: 0;
+        text-align: center;
+      }
+
+      a {
+        color: gold;
+        text-decoration: none;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        display: block;
+        padding: 12px 16px;
+        transition: background-color 0.3s ease;
+      }
+
+      a:hover {
+        background-color: #575757;
+      }
+
+      .nav-dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .nav-dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #24292e;
+        min-width: 160px;
+        z-index: 1;
+        border-radius: 5px;
+      }
+
+      .nav-dropdown-content a {
+        color: gold;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .nav-dropdown-content a:hover {
+        background-color: #575757;
+      }
+
+      .nav-dropdown:hover .nav-dropdown-content {
+        display: block;
+      }
+
+      .nav-dropdown .dropbtn {
+        background-color: transparent;
+        color: gold;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+      }
+
+      th {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .social-section {
+        width: 80%;
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #333;
+        border-radius: 10px;
+      }
+
+      .social-section h2 {
+        text-align: left;
+        font-size: 24px;
+        margin-bottom: 15px;
+      }
+
+      .socials-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+        gap: 20px;
+        justify-items: center;
+      }
+
+      .socials-container a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 120px;
+        height: 120px;
+        text-align: center;
+        border-radius: 10px;
+        color: white;
+        text-decoration: none;
+        font-size: 50px; /* Increased size for the logos */
+        transition: transform 0.3s ease;
+      }
+
+      .socials-container a:hover {
+        transform: scale(1.1);
+      }
+
+      .instagram {
+        background-color: #e4405f;
+      }
+
+      .youtube {
+        background-color: #ff0000;
+      }
+
+      .x {
+        background-color: #000000;
+      }
+
+      .x i {
+        font-size: 60px;
+      }
+
+      .tiktok {
+        background-color: #000000;
+      }
+
+      .tiktok i {
+        font-size: 60px;
+      }
+
+      .twitch {
+        background-color: #9146ff;
+      }
+
+      .vk {
+        background-color: #4c75a3;
+      }
+
+      .threads {
+        background-color: #ffffff;
+      }
+
+      .threads i {
+        font-size: 60px;
+      }
+
+      .bluesky {
+        background-color: #00b0ff;
+      }
+
+      .bluesky i {
+        font-size: 60px;
+      }
+
+      .facebook {
+        background-color: #1877f2;
+      }
+
+      .facebook i {
+        font-size: 60px;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Socials</h1>
+
+    <table>
+      <tr>
+        <th><a href="/index.html">Home</a></th>
+        <th><a href="/Socials/socials.html">Socials</a></th>
+        <th><a href="/Fortnite-Map/Fortnite-BR/Fortnite-Map.html">Map</a></th>
+        <th><a href="/News/Fortnite-News.html">News</a></th>
+        <th><a href="/Fortnite-Shop/Fortnite-Shop.html">Item Shop</a></th>
+        <th>
+          <a href="/Fortnite-Cosmetics/Fortnite-Cosmetics.html">Cosmetics</a>
+        </th>
+        <th class="nav-dropdown">
+          <button class="dropbtn">Progress Tracker</button>
+          <div class="nav-dropdown-content">
+            <a href="/Fortnite-Progress-Tracker/Fortnite-Progress-Tracker.html"
+              >Fortnite Progress Tracker</a
+            >
+            <a href="/Fortnite-OG-Tracker/Fortnite-OG-Tracker.html"
+              >Fortnite OG Progress Tracker</a
+            >
+            <a
+              href="/Fortnite-Festival-Progress-Tracker/Fortnite-Festival-Progress-Tracker.html"
+              >Fortnite Festival Progress Tracker</a
+            >
+            <a href="/Lego-Fortnite-Progress-Tracker/Lego-Fortnite-Tracker.html"
+              >Fortnite Lego Progress Tracker</a
+            >
+          </div>
+        </th>
+      </tr>
+    </table>
+
+    <div class="container">
+      <!-- NiteTracker.net Social Section -->
+      <div class="social-section">
+        <h2>NiteTracker Socials:</h2>
+        <div class="socials-container">
+          <a href="https://www.instagram.com/nitetracker/" class="instagram">
+            <i class="fa fa-instagram"></i>
+          </a>
+          <a href="https://x.com/NiteTracker" class="x">
+            <i class="fa fa-twitter"></i>
+            <!-- Changed to Twitter icon for X -->
+          </a>
+        </div>
+      </div>
+
+      <!-- Replug Social Section -->
+      <div class="social-section">
+        <h2>Replug Socials:</h2>
+        <div class="socials-container">
+          <a href="https://www.instagram.com/replug2/" class="instagram">
+            <i class="fa fa-instagram"></i>
+          </a>
+          <a
+            href="https://www.youtube.com/channel/UC5aYBv0XAktam90_aHUlxWw"
+            class="youtube"
+          >
+            <i class="fa fa-youtube"></i>
+          </a>
+          <a href="https://x.com/Replugs2" class="x">
+            <i class="fa fa-twitter"></i>
+            <!-- Changed to Twitter icon for X -->
+          </a>
+          <a href="https://www.twitch.tv/replug2" class="twitch">
+            <i class="fa fa-twitch"></i>
+          </a>
+          <a
+            href="https://www.facebook.com/profile.php?id=61571295546676"
+            class="facebook"
+          >
+            <i class="fa fa-facebook"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

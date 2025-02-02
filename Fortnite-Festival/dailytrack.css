@@ -1,0 +1,67 @@
+/* Background color for the entire item shop */
+body {
+  background-color: #24292e;
+  /* Dark shade of gray/black */
+  color: white;
+  /* Ensure text is readable on dark backgrounds */
+  font-family: Arial, sans-serif;
+  /* Set a simple font */
+  margin: 0;
+  /* Remove default margins */
+  padding: 0;
+  /* Remove default padding */
+}
+
+
+/* Navigation bar */
+table {
+  width: 100%;
+}
+
+table td {
+  padding: 10px;
+}
+
+/* Container for selected items */
+.selected-items-container {
+  display: flex;
+  flex-wrap: wrap;
+  /* Allow items to wrap to the next row */
+  overflow-x: auto;
+  /* Allow horizontal scrolling if items overflow */
+  padding: 10px;
+  /* Add padding for spacing */
+  justify-content: center;
+  /* Center items horizontally */
+}
+
+.item-card {
+  width: 200px;
+  margin: 10px;
+  /* Add margin between items */
+  border: 1px solid #ccc;
+  /* Add border for item card */
+  box-sizing: border-box;
+  /* Include padding and border in the container's total width */
+}
+
+/* Style for the box containing each selected item */
+.item-box {
+  text-align: center;
+  /* Center align text */
+  padding: 10px;
+  /* Add padding inside the box */
+}
+
+.item-image {
+  max-width: 100px;
+  /* Adjust as needed */
+  margin-bottom: 5px;
+  /* Add margin between image and text */
+}
+
+.item-name {
+  margin: 0;
+  font-size: 18px;
+  /* Adjust font size as needed */
+}

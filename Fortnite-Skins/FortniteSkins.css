@@ -1,0 +1,126 @@
+/* Background color for the entire item shop */
+body {
+  background-color: #24292e;
+  /* Dark shade of gray/black */
+  color: white;
+  /* Ensure text is readable on dark backgrounds */
+  font-family: Arial, sans-serif;
+  /* Set a simple font */
+  margin: 0;
+  /* Remove default margins */
+  padding: 0;
+  /* Remove default padding */
+}
+
+/* Style for the item-shop container */
+.item-shop {
+  display: flex;
+  /* Use flexbox for layout */
+  flex-wrap: wrap;
+  /* Allow item cards to wrap on smaller screens */
+  justify-content: center;
+  /* Center item cards */
+  padding: 20px;
+  /* Padding around the item shop */
+  background-color: #24292e;
+  /* Darker shade for the shop container */
+}
+
+/* Style for individual item cards */
+.item-card {
+  border: 2px solid #444;
+  /* Border for item cards */
+  padding: 20px;
+  /* Padding inside each card */
+  border-radius: 10px;
+  /* Rounded corners */
+  text-align: center;
+  /* Center content */
+  background-color: #333;
+  /* Dark gray background */
+  margin: 10px;
+  /* Space between item cards */
+  width: 150px;
+  /* Fixed width for all item cards */
+}
+
+/* Styling for the item image */
+.item-image {
+  width: 100px;
+  /* Consistent width for all item images */
+  height: 100px;
+  /* Consistent height */
+  object-fit: cover;
+  /* Maintain aspect ratio */
+  border-radius: 10px;
+  /* Rounded corners */
+}
+
+/* Styling for item names */
+.item-name {
+  font-size: 1.2em;
+  /* Standard font size */
+  margin-top: 10px;
+  /* Space between image and text */
+  color: white;
+  /* Ensure visibility on dark backgrounds */
+}
+
+/* Styling for item rarity */
+.item-rarity {
+  font-size: 1em;
+  /* Standard font size */
+  color: white;
+  /* Ensure text is readable on dark backgrounds */
+}
+
+/* Background colors for different rarities */
+.common {
+  background-color: gray;
+  /* Gray background for common outfits */
+}
+
+.uncommon {
+  background-color: gray;
+  /* Green background for uncommon outfits */
+}
+
+.rare {
+  background-color: gray;
+  /* Blue background for rare outfits */
+}
+
+.epic {
+  background-color: gray;
+  /* Purple background for epic outfits */
+}
+
+/* Style for navigation button */
+.nav-button {
+  display: inline-block;
+  /* Allow the button to be inline */
+  padding: 10px 20px;
+  /* Padding for the button */
+  background-color: #ffcc00;
+  /* Yellow color for the button */
+  color: black;
+  /* Text color */
+  text-decoration: none;
+  /* No underline */
+  border-radius: 5px;
+  /* Rounded corners */
+  font-size: 1.1em;
+  /* Slightly larger font size */
+  text-align: center;
+  /* Center text in the button */
+  margin-top: 20px;
+  /* Margin above the button */
+  margin-left: 10px;
+  transition: background-color 0.3s;
+  /* Smooth hover transition */
+}
+
+.nav-button:hover {
+  background-color: #ffa500;
+  /* Darker yellow on hover */
+}

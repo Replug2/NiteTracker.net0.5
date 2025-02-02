@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile Settings</title>
+
+    <!-- Firebase Scripts -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-analytics.js";
+      import {
+        getAuth,
+        GoogleAuthProvider,
+        FacebookAuthProvider,
+        signInWithPopup,
+        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
+        signOut,
+      } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+      import {
+        getFirestore,
+        doc,
+        setDoc,
+        getDoc,
+      } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+
+      // Your Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyA86HDM1Cp7j093oIKJ5t_8KMZeYllnkdA",
+        authDomain: "files-ea429.firebaseapp.com",
+        projectId: "files-ea429",
+        storageBucket: "files-ea429.firebasestorage.app",
+        messagingSenderId: "308282230795",
+        appId: "1:308282230795:web:2d42d36edd0ca7ddc3df0e",
+        measurementId: "G-L41ZS3R5PM",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const auth = getAuth();
+      const db = getFirestore(app);
+
+      // Sign up with Google
+      const googleProvider = new GoogleAuthProvider();
+      async function signUpWithGoogle() {
+        console.log("Google sign-in clicked"); // Debugging line
+        try {
+          const result = await signInWithPopup(auth, googleProvider);
+          const user = result.user;
+          console.log("Signed in with Google:", user);
+
+          // Save the user data to Firestore
+          saveUserData(user);
+
+          showProfileSection(); // Show profile settings after sign up
+        } catch (error) {
+          console.error("Error signing up with Google:", error);
+        }
+      }
+
+      // Sign up with Facebook
+      const facebookProvider = new FacebookAuthProvider();
+      async function signUpWithFacebook() {
+        console.log("Facebook sign-in clicked"); // Debugging line
+        try {
+          const result = await signInWithPopup(auth, facebookProvider);
+          const user = result.user;
+          console.log("Signed in with Facebook:", user);
+
+          // Save the user data to Firestore
+          saveUserData(user);
+
+          showProfileSection(); // Show profile settings after sign up
+        } catch (error) {
+          console.error("Error signing up with Facebook:", error);
+        }
+      }
+
+      // Sign up with Email & Password
+      async function signUpWithEmail() {
+        console.log("Email sign-up clicked"); // Debugging line
+        const email = prompt("Enter your email:");
+        const password = prompt("Enter your password:");
+        try {
+          const result = await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+          const user = result.user;
+          console.log("User signed up with Email:", user);
+
+          // Save the user data to Firestore
+          saveUserData(user);
+
+          showProfileSection(); // Show profile settings after sign up
+        } catch (error) {
+          console.error("Error signing up with Email:", error);
+        }
+      }
+
+      // Sign in with Email & Password
+      async function signInWithEmail() {
+        console.log("Email sign-in clicked"); // Debugging line
+        const email = prompt("Enter your email:");
+        const password = prompt("Enter your password:");
+        try {
+          const result = await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+          const user = result.user;
+          console.log("User signed in with Email:", user);
+
+          showProfileSection(); // Show profile settings after login
+        } catch (error) {
+          console.error("Error signing in with Email:", error);
+        }
+      }
+
+      // Sign out the user
+      async function signOutUser() {
+        try {
+          await signOut(auth);
+          console.log("User signed out");
+
+          // Reset UI to login/sign-up state
+          document.getElementById("auth-container").style.display = "block";
+          document.getElementById("profile-container").style.display = "none";
+          document.getElementById("sign-out-btn").style.display = "none";
+        } catch (error) {
+          console.error("Error signing out:", error);
+        }
+      }
+
+      // Save user data to Firestore (e.g., email)
+      async function saveUserData(user) {
+        try {
+          const userRef = doc(db, "users", user.uid);
+          await setDoc(userRef, {
+            email: user.email,
+            displayName: user.displayName || "No Name",
+            createdAt: new Date(),
+          });
+          console.log("User data saved to Firestore");
+        } catch (error) {
+          console.error("Error saving user data:", error);
+        }
+      }
+
+      // Load user data from Firestore (optional)
+      async function loadUserData(userId) {
+        try {
+          const userRef = doc(db, "users", userId);
+          const userDoc = await getDoc(userRef);
+          if (userDoc.exists()) {
+            console.log("User data:", userDoc.data());
+            // Show the user data in the profile or other sections
+          } else {
+            console.log("No user data found");
+          }
+        } catch (error) {
+          console.error("Error loading user data:", error);
+        }
+      }
+
+      function setProfileImage(imageSrc, imgElement) {
+        // Update the profile image UI
+        document.getElementById("current-profile-img").src = imageSrc;
+
+        // Optionally, add logic to update the user's profile image in Firestore.
+        const user = auth.currentUser;
+        if (user) {
+          const userRef = doc(db, "users", user.uid);
+          setDoc(
+            userRef,
+            {
+              profileImage: imageSrc,
+            },
+            { merge: true }
+          );
+        }
+      }
+
+      // Display profile section
+      function showProfileSection() {
+        document.getElementById("auth-container").style.display = "none";
+        document.getElementById("profile-container").style.display = "block";
+        document.getElementById("sign-out-btn").style.display = "inline-block";
+      }
+
+      // Check authentication state on page load
+      window.onload = function () {
+        auth.onAuthStateChanged((user) => {
+          if (user) {
+            // User is signed in, show profile section
+            showProfileSection();
+            // Optionally: Load additional user data like email from Firestore if needed
+            loadUserData(user.uid);
+          } else {
+            // User is signed out, show sign up/login options
+            document.getElementById("auth-container").style.display = "block";
+            document.getElementById("profile-container").style.display = "none";
+            document.getElementById("sign-out-btn").style.display = "none";
+          }
+        });
+      };
+    </script>
+
+    <style>
+      body {
+        background-color: #24292e;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      h1 {
+        margin: 20px;
+      }
+
+      .auth-btn {
+        padding: 10px 20px;
+        background-color: #4c8bf5;
+        color: white;
+        border: none;
+        cursor: pointer;
+        margin-top: 20px;
+        border-radius: 5px;
+      }
+
+      .auth-btn:hover {
+        background-color: #3a73c9;
+      }
+
+      .profile-container {
+        text-align: center;
+        padding: 20px;
+      }
+
+      .profile-option {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin: 10px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: 0.3s;
+      }
+
+      .profile-option:hover {
+        border-color: gold;
+        transform: scale(1.1);
+      }
+
+      .selected {
+        border-color: blue !important;
+      }
+
+      .profile-section {
+        margin-top: 40px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Profile Settings</h1>
+
+    <!-- Authentication Section: Sign Up / Sign In / Sign Out -->
+    <div id="auth-container">
+      <h2>Authentication</h2>
+      <button id="google-btn" class="auth-btn" onclick="signUpWithGoogle()">
+        Sign Up / Login with Google
+      </button>
+      <button id="facebook-btn" class="auth-btn" onclick="signUpWithFacebook()">
+        Sign Up / Login with Facebook
+      </button>
+      <button id="email-btn" class="auth-btn" onclick="signUpWithEmail()">
+        Sign Up / Login with Email
+      </button>
+      <br /><br />
+      <button
+        id="sign-out-btn"
+        class="auth-btn"
+        style="display: none"
+        onclick="signOutUser()"
+      >
+        Sign Out
+      </button>
+    </div>
+
+    <!-- Profile Image Section -->
+    <div id="profile-container" class="profile-section" style="display: none">
+      <h2>Choose Your Profile Picture</h2>
+      <img
+        id="current-profile-img"
+        src="/NiteTracker logo.png"
+        alt="Current Profile"
+        width="120"
+        height="120"
+      />
+      <div id="profile-options">
+        <p>Select a new profile image:</p>
+        <img
+          src="/NiteTracker logo.png"
+          alt="Avatar 1"
+          class="profile-option"
+          onclick="setProfileImage('avatar1.png', this)"
+        />
+        <img
+          src="avatar2.png"
+          alt="Avatar 2"
+          class="profile-option"
+          onclick="setProfileImage('avatar2.png', this)"
+        />
+        <img
+          src="avatar3.png"
+          alt="Avatar 3"
+          class="profile-option"
+          onclick="setProfileImage('avatar3.png', this)"
+        />
+      </div>
+      <br />
+      <a href="index.html">Back to Dashboard</a>
+    </div>
+  </body>
+</html>

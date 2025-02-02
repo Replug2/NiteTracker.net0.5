@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/NiteTracker logo.png" />
+    <title>Reload Oasis Map</title>
+    <style>
+      body {
+        background-color: #24292e;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h1 {
+        margin: 20px 0;
+        text-align: center;
+      }
+
+      table {
+        width: 100%;
+        margin-bottom: 15px;
+        text-align: center;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+      }
+
+      th,
+      td {
+        border: 2px solid black;
+        padding: 0;
+        text-align: center;
+      }
+
+      a {
+        color: gold;
+        text-decoration: none;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        display: block;
+        padding: 12px 16px;
+        transition: background-color 0.3s ease;
+      }
+
+      a:hover {
+        background-color: #575757;
+      }
+
+      .nav-dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .nav-dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #24292e;
+        min-width: 160px;
+        z-index: 1;
+        border-radius: 5px;
+      }
+
+      .nav-dropdown-content a {
+        color: gold;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .nav-dropdown-content a:hover {
+        background-color: #575757;
+      }
+
+      .nav-dropdown:hover .nav-dropdown-content {
+        display: block;
+      }
+
+      .nav-dropdown .dropbtn {
+        background-color: transparent;
+        color: gold;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+      }
+
+      th {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .layout-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      .left-panel {
+        width: 25%;
+        background-color: #333;
+        padding: 10px;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+        overflow-y: auto;
+        margin-top: 20px;
+        border-radius: 5px;
+      }
+
+      .left-panel h2 {
+        color: gold;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+
+      .switch {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+
+      .switch-label {
+        font-size: 16px;
+        color: white;
+      }
+
+      .toggle {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 20px;
+      }
+
+      .toggle input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 34px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 14px;
+        width: 14px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+
+      input:checked + .slider {
+        background-color: #1c7ab7;
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(20px);
+      }
+
+      #map-container {
+        flex: 1;
+        margin-top: 20px;
+        margin-left: 10px;
+        border: 0px #24292e;
+        width: 70%;
+        height: auto;
+        overflow: hidden;
+        background: black;
+        position: relative;
+      }
+
+      #map {
+        width: 100%;
+        height: 100%;
+        transform-origin: center center;
+        transition: transform 0.3s ease;
+      }
+
+      /* Styles for the map selection images */
+      .map-selection {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        justify-content: center;
+      }
+
+      .map-selection img {
+        width: 100px;
+        height: auto;
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: border 0.3s;
+      }
+
+      .map-selection img:hover {
+        border: 2px solid gold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Reload Oasis Map</h1>
+
+    <table>
+      <tr>
+        <th><a href="/index.html">Home</a></th>
+        <th><a href="/Socials/socials.html">Socials</a></th>
+        <th><a href="/Fortnite-Map/Fortnite-BR/Fortnite-Map.html">Map</a></th>
+        <th><a href="/News/Fortnite-News.html">News</a></th>
+        <th><a href="/Fortnite-Shop/Fortnite-Shop.html">Item Shop</a></th>
+        <th>
+          <a href="/Fortnite-Cosmetics/Fortnite-Cosmetics.html">Cosmetics</a>
+        </th>
+        <th class="nav-dropdown">
+          <button class="dropbtn">Progress Tracker</button>
+          <div class="nav-dropdown-content">
+            <a href="/Fortnite-Progress-Tracker/Fortnite-Progress-Tracker.html"
+              >Fortnite Progress Tracker</a
+            >
+            <a href="/Fortnite-OG-Tracker/Fortnite-OG-Tracker.html"
+              >Fortnite OG Progress Tracker</a
+            >
+            <a
+              href="/Fortnite-Festival-Progress-Tracker/Fortnite-Festival-Progress-Tracker.html"
+              >Fortnite Festival Progress Tracker</a
+            >
+            <a href="/Lego-Fortnite-Progress-Tracker/Lego-Fortnite-Tracker.html"
+              >Fortnite Lego Progress Tracker</a
+            >
+          </div>
+        </th>
+      </tr>
+    </table>
+
+    <div class="map-selection">
+      <a href="/Fortnite-Map//Fortnite-BR//Fortnite-Map.html">
+        <img
+          src="https://cdn2.unrealengine.com/fnbr-33-00-c6s1-discoverplaylist-tiles-br-480x270v2-480x270-8c8fd9f4f1f4.jpg"
+          alt="Fortnite Battle Royale"
+          data-map="battleRoyale"
+        />
+      </a>
+      <a href="/Fortnite-Map//Reload-Oasis//Reload-Oasis-Map.html">
+        <img
+          src="https://pbs.twimg.com/media/GcNNhRJWAAAJs6X?format=jpg&name=large"
+          alt="Reload Oasis"
+          data-map="reloadOasis"
+        />
+      </a>
+      <a href="/Fortnite-Map//Reload-Venture//Reload-Venture.html">
+        <img
+          src="https://admin.esports.gg/wp-content/uploads/2024/06/Fortnite-Reload-map-featured-image-968x544.jpg"
+          alt="Reload Venture"
+          data-map="reloadVenture"
+        />
+      </a>
+      <a href="/Fortnite-Map//Fortnite-OG//Fortnite-OG.html">
+        <img
+          src="https://cdn2.unrealengine.com/en-fn33-00-c1s1-discover-playlist-tiles-og-1920x1080-1920x1080-cdbbd8c48562.jpg"
+          alt="OG Map"
+          data-map="ogMap"
+        />
+      </a>
+    </div>
+
+    <div class="layout-container">
+      <div class="left-panel">
+        <h2>Interactive Items</h2>
+
+        <!-- Show POIs Toggle -->
+        <div class="switch">
+          <label class="switch-label" for="poiSwitch">Show POIs</label>
+          <label class="toggle">
+            <input type="checkbox" id="poiSwitch" />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div id="map-container">
+        <img
+          id="map"
+          src="/Fortnite-Map//Reload-Oasis//reload oasis map.png"
+          Default
+          Map
+          --
+        />
+      </div>
+    </div>
+
+    <script>
+      const poiSwitch = document.getElementById("poiSwitch");
+      const mapImages = {
+        battleRoyale: "/Fortnite-Map//Fortnite-BR//Fortnite BR Map.png",
+        reloadOasis: "/Fortnite-Map//Reload-Oasis//reload oasis map.png",
+        reloadVenture: "/Fortnite-Map//Reload-Venture//reload venture map.png",
+        ogMap: "/Fortnite-Map//Fortnite-OG//Fortnite OG.png",
+        poiNames: "/Fortnite-Map//Fortnite-BR//Fortnite BR POI Map.png",
+      };
+
+      const map = document.getElementById("map");
+      const mapSelectionImages =
+        document.querySelectorAll(".map-selection img");
+
+      function resetAllToggles() {
+        poiSwitch.checked = false;
+      }
+
+      function updateMapImage(selectedMap) {
+        if (poiSwitch.checked && selectedMap === "battleRoyale") {
+          map.src = mapImages.poiNames;
+        } else {
+          map.src = mapImages[selectedMap];
+        }
+      }
+
+      mapSelectionImages.forEach((img) => {
+        img.addEventListener("click", (e) => {
+          mapSelectionImages.forEach((i) => i.classList.remove("active"));
+          img.classList.add("active");
+          const selectedMap = img.getAttribute("data-map");
+          resetAllToggles();
+          updateMapImage(selectedMap);
+        });
+      });
+
+      poiSwitch.addEventListener("change", () => {
+        const activeMap = document
+          .querySelector(".map-selection img.active")
+          .getAttribute("data-map");
+        updateMapImage(activeMap);
+      });
+    </script>
+  </body>
+</html>
